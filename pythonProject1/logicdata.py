@@ -24,41 +24,6 @@ def obtenerIpDesdeDominio(dominio):
             # Imprime la región de la IP obtenida
             print("La región de la IP ->" + str(ip) + " es " + str(resultadoRegion.json()))
 
-# Lista de dominios de empresas con sus respectivas etiquetas
-dominios_empresas = [
-    "avn.com.co",        # Avianca
-    "bancolombia.com",   # Bancolombia
-    "eci.com",           # Éxito
-    "cemexcol.com",      # Cemex Colombia
-    "alpina.com",        # Alpina
-    "bavaria.com.co",    # Bavaria
-    "sura.com",          # Grupo Sura
-    "nexura.com",        # Nexura (Grupo Aval)
-    "cajacopi.co",       # Cajacopi
-    "terpel.com",        # Terpel
-    "postobon.com",      # Postobón
-    "une.com.co",        # UNE (ahora parte de Tigo)
-    "tigo.com.co",       # Tigo
-    "carvajal.com",      # Carvajal
-    "grupopromotora.com",# Promotora de Seguridad
-    "conavi.com.co",     # Conavi
-    "bancoomeva.com",    # Bancoomeva
-    "gruposura.com",     # Grupo Sura
-    "hipotecaria.com",   # Hipotecaria
-    "lagranaventura.com",# La Gran Aventura
-    "ferreteriaferraz.com", # Ferretería Ferraz
-    "sodimac.com.co",    # Sodimac
-    "baloto.com",        # Baloto
-    "tuscal.com",        # Tuscal
-    "grupoaval.com",    # Grupo Aval
-    "grupoexito.com",   # Grupo Éxito
-    "santoangel.com.co", # Santo Ángel
-    "tropicanafm.com",   # Tropicana
-    "prisa.com",         # Prisa Radio
-    "rappi.com",         # Rappi
-    "codensa.com.co",    # Codensa
-]
-
 def obtenerEmailsDesdeDominio(dominio):
     """
     Obtiene una lista de direcciones de correo electrónico asociadas a un dominio usando la API de Hunter.
@@ -72,12 +37,15 @@ def obtenerEmailsDesdeDominio(dominio):
     print(json.dumps(resultadoEmails.json(), indent=4))
     
     # Verifica si hay correos electrónicos en la respuesta JSON
-    if resultadoEmails.json()['data']['emails'] is not None:
+    if resultadoEmails.json()['data']['emails'] != None:
         # Recorre cada correo electrónico y lo imprime
         for correo in range(len(resultadoEmails.json()["data"]["emails"])):
-            print("Correo: " + str(resultadoEmails.json()["data"]["emails"][correo]["value"]))
+            print("correo: " + str(resultadoEmails.json()["data"]["emails"][correo]["value"]))
 
-# Itera sobre cada dominio en la lista y obtiene la IP y correos electrónicos
+# Itera sobre cada dominio en la lista y obtiene la IP para cada dominio
 for dominio in dominios_empresas:
-    obtenerIpDesdeDominio(dominio)
-    obtenerEmailsDesdeDominio(dominio)
+    obtenerIpDesdeDominio(dominio)  # Obtiene y muestra la región de la IP para cada dominio
+
+# Obtiene y muestra los correos electrónicos asociados a un dominio específico
+obtenerEmailsDesdeDominio("dersa.com.co")  # Obtiene correos electrónicos para 'ducati.com'
+
